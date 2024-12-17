@@ -1,22 +1,24 @@
-'use server'
+"use server";
 
-import prisma from "@/lib/db"
-import { revalidatePath } from "next/cache"
+import prisma from "@/lib/db";
+import { revalidatePath } from "next/cache";
 
-export async function fetchAll() {    
-    const dbData = await prisma.product.findMany()
-    
+export async function fetchAll() {
+  try {
+    const dbData = await prisma.product.findMany();
     return {
-        data: dbData
-    }
+      data: dbData,
+    };
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  } catch (e) {} 
 }
 
 export async function create(name: string) {
-    await prisma.product.create({
-        data: {
-            name: name
-        }
-    })
+  await prisma.product.create({
+    data: {
+      name: name,
+    },
+  });
 
-    revalidatePath('/product')
+  revalidatePath("/product");
 }
