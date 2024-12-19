@@ -1,8 +1,7 @@
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 import { fetchAll } from "./action";
 import TestButton from "./ProductCreateForm";
-import ShowData from "./data";
 
 export default async function ProductPage() {
   const data = (await fetchAll())?.data;
@@ -11,7 +10,11 @@ export default async function ProductPage() {
     <div>
       <div>Product Page</div>
       <br />
-      <ShowData data={data} />
+      <div>
+        {data?.map((i) => (
+          <div key={i.id}>{i.name}</div>
+        ))}
+      </div>{" "}
       <br />
       <TestButton />
     </div>
