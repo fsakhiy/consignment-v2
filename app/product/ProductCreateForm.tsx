@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { create } from "./server";
+import { create } from "./action";
 
 export default function TestButton() {
   const [inputValue, setInputValue] = useState("");
