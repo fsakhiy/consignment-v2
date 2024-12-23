@@ -1,7 +1,7 @@
 export const dynamic = "force-dynamic";
 
+import ProductItem from "@/components/product-item";
 import { fetchAll } from "./action";
-import ProductItem from "./product";
 import CreateProductForm from "./ProductCreateForm";
 
 export default async function ProductPage() {

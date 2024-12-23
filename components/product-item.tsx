@@ -1,5 +1,6 @@
 "use client"
-import { deleteProduct } from "./action";
+import { deleteProduct } from '@/app/product/action';
+// import { deleteProduct } from "./action";
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 interface Props {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
