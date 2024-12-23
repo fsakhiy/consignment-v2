@@ -1,26 +1,60 @@
 "use client";
 
-import { useState } from "react";
 import { create } from "./action";
 
-export default function TestButton() {
-  const [inputValue, setInputValue] = useState("");
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
 
-  function createData() {
-    create(inputValue);
+import { Button } from "@/components/ui/button";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+
+const formSchema = z.object({
+  name: z.string().min(2).max(50),
+});
+
+export default function CreateProductForm() {
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: "Generic Product ###",
+    },
+  });
+
+  function createData(values: z.infer<typeof formSchema>) {
+    create(values.name);
   }
 
   return (
-    <div>
-      <input
-        type="text"
-        name="name"
-        placeholder="test"
-        className="border"
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-      />
-      <button onClick={() => createData()}>add product</button>
-    </div>
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(createData)} className="space-y-8">
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Username</FormLabel>
+              <FormControl>
+                <Input placeholder="shadcn" {...field} />
+              </FormControl>
+              <FormDescription>
+                This is your public display name.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <Button type="submit">Submit</Button>
+      </form>
+    </Form>
   );
 }

@@ -20,3 +20,12 @@ export async function create(name: string) {
 
   revalidatePath("/product");
 }
+
+export async function deleteProduct(id: number) {
+  await prisma.product.delete({
+    where: {
+      id: id
+    }
+  })
+  revalidatePath('/product')
+}
