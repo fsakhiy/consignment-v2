@@ -13,7 +13,7 @@ export default async function ProductPage() {
       <br />
       <CreateProductForm />
       <br />
-      <div>
+      <div className="flex flex-col gap-2">
         {data?.map((i) => (
           <ProductItem key={i.id} i={i} />
         ))}
