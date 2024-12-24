@@ -4,7 +4,11 @@ import prisma from "@/lib/db";
 import { revalidatePath } from "next/cache";
 
 export async function fetchAll() {
-  const dbData = await prisma.product.findMany();
+  const dbData = await prisma.product.findMany({
+    orderBy: {
+      createdAt: 'asc'
+    }
+  });
   
   return {
     data: dbData,
