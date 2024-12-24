@@ -1,6 +1,6 @@
 export const dynamic = "force-dynamic";
 
-import ProductItem from "@/components/product-item";
+// import ProductItem from "@/components/product-item";
 import { fetchAll } from "./action";
 import CreateProductForm from "./ProductCreateForm";
 import { DataTable } from "./data-table";
