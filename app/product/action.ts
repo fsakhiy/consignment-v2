@@ -2,6 +2,8 @@
 
 import prisma from "@/lib/db";
 import { revalidatePath } from "next/cache";
+import { z } from "zod";
+import { formSchema } from "./ProductCreateForm";
 
 export async function fetchAll() {
   const dbData = await prisma.product.findMany({
@@ -15,10 +17,12 @@ export async function fetchAll() {
   };
 }
 
-export async function create(name: string) {
+export async function create(values: z.infer<typeof formSchema>) {
   await prisma.product.create({
     data: {
-      name: name,
+      name: values.name,
+      sku: values.sku,
+      description: values.description
     },
   });
 
