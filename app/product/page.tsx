@@ -8,6 +8,10 @@ import { columns } from "./columns";
 
 export default async function ProductPage() {
   const data = (await fetchAll())?.data;
+  const refactoredData = data.map((d, index) => ({
+    index: index + 1,
+    ...d,
+  }))
 
   return (
     <div>
@@ -21,7 +25,7 @@ export default async function ProductPage() {
         ))}
       </div> */}
       <div>
-        <DataTable columns={columns} data={data} />
+        <DataTable columns={columns} data={refactoredData} />
       </div>
     </div>
   );
